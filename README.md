@@ -1,5 +1,5 @@
 # Supra AutoFi Agent
-Transform natural language into Automated DeFi strategies on the Supra to deploy and manage auto top-up strategies without writing code.
+AI Agent to Make Automated DeFi strategies on the Supra to deploy and manage auto top-up strategies without writing code.
 
 ## ✨ Features
 
