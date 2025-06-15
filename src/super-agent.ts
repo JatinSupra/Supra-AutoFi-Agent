@@ -5,8 +5,7 @@ import dotenv from 'dotenv';
 // Load environment variables
 dotenv.config();
 
-// Configuration
-interface SuperAgentConfig {
+ interface SuperAgentConfig {
   supraCient: SupraClient;
   openaiClient: OpenAI;
   userAccount: SupraAccount;
@@ -14,8 +13,7 @@ interface SuperAgentConfig {
   modulePrefix: string;
 }
 
-// Strategy Types
-interface AutomationStrategy {
+ interface AutomationStrategy {
   id: string;
   type: 'auto_topup';
   name: string;
@@ -29,7 +27,7 @@ interface AutomationStrategy {
   lastChecked?: Date;
 }
 
-// AI Function Definitions for OpenAI (Updated - removed withdraw functions)
+// AI Function Definitions for OpenAI
 const FUNCTION_DEFINITIONS = [
   {
     name: "create_auto_topup_strategy",
@@ -271,8 +269,7 @@ Always be helpful and clear, but keep responses concise.`
     const accountInfo = await this.config.supraCient.getAccountInfo(senderAddr);
     const sequenceNumber = BigInt(accountInfo.sequence_number);
 
-    // Updated function args - only target address needed
-    const functionArgs: Uint8Array[] = [
+     const functionArgs: Uint8Array[] = [
       new HexString(params.targetAddress).toUint8Array()
     ];
 
@@ -285,15 +282,14 @@ Always be helpful and clear, but keep responses concise.`
     console.log('📋 Target:', params.targetAddress);
 
     try {
-      // Get automation fee estimate
-      let automationFeeCap = BigInt(144000000); // Default from your CLI example
+       let automationFeeCap = BigInt(144000000);  
       
       try {
         console.log('💰 Estimating automation fee...');
         const feeEstimate = await this.config.supraCient.invokeViewMethod(
           "0x1::automation_registry::estimate_automation_fee",
           [],
-          ["5000"] // Gas amount from CLI example
+          ["5000"] 
         );
         
         if (feeEstimate && feeEstimate[0]) {
@@ -304,18 +300,17 @@ Always be helpful and clear, but keep responses concise.`
         console.log('⚠️ Using default fee cap');
       }
 
-      // Use the exact parameters from your working CLI command
       const serializedAutomationTx = this.config.supraCient.createSerializedAutomationRegistrationTxPayloadRawTxObject(
         senderAddr,
         sequenceNumber,
         moduleAddr,
-        "autofinal", // Updated module name
-        "auto_topup_with_state", // Updated function name
-        [], // No type arguments needed
+        "autofinal",  
+        "auto_topup_with_state",  
+        [], 
         functionArgs,
-        BigInt(5000),    // task-max-gas-amount from CLI
-        BigInt(200),     // task-gas-price-cap from CLI  
-        automationFeeCap, // task-automation-fee-cap
+        BigInt(5000),   
+        BigInt(200),  
+        automationFeeCap,  
         BigInt(expiryTime),
         []
       );

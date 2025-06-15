@@ -14,7 +14,7 @@ class SuperAgentCLI {
     this.rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
-      prompt: chalk.cyan('🚀 ') + chalk.bold('Super Agent > ')
+      prompt: chalk.cyan('🧔🏻👩🏻 ') + chalk.bold('YOU > ')
     });
   }
 
