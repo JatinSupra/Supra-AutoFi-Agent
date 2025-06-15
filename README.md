@@ -16,8 +16,8 @@ Transform natural language into Automated DeFi strategies on the Supra to deploy
 #### Installation
 
 ```bash
-git clone 
-cd 
+git clone https://github.com/JatinSupra/Supra-AutoFi-Agent.git
+cd Supra-AutoFi-Agent
 npm install
 ```
 
