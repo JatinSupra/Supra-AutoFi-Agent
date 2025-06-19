@@ -22,16 +22,20 @@ npm install
 ```
 
 #### Configuration
-Edit `.env` file:
+Create & Edit `.env` file:
+
+> You can get your OpenAI API Key [HERE](https://platform.openai.com/api-keys)
 
 ```env
 OPENAI_API_KEY=sk-your-openai-key
 SUPRA_PRIVATE_KEY=0x...your-private-key
-SUPRA_CONTRACT_ADDRESS=0x1c5acf62be507c27a7788a661b546224d806246765ff2695efece60194c6df05
+SUPRA_CONTRACT_ADDRESS=0x...f05
 SUPRA_RPC_URL=https://rpc-testnet.supra.com
 ```
 
 #### Run the Agent
+
+> Make sure you redeploy the Move contract by your Supra CLI to replace your Address & Pvt key in `.env`
 
 ```bash
 npm run dev
