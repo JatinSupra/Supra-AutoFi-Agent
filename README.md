@@ -38,7 +38,7 @@ SUPRA_RPC_URL=https://rpc-testnet.supra.com
 > Make sure you redeploy the Move contract by your Supra CLI to replace your Address & Pvt key in `.env`
 
 ```bash
-npm run dev
+npm start
 ```
 
 ## Available Commands
@@ -49,11 +49,12 @@ npm run dev
 - "How are my strategies performing?"
 
 #### Quick Commands
-- `help` - Show available commands
-- `status` - Check all strategies
-- `strategies` - List active strategies  
-- `clear` - Clear screen
-- `exit` - Quit agent
+- `create`: Create new auto top-up strategy
+- `analytics`: View performance dashboard
+- `health`: Check strategy health
+- `status`: Show all strategies
+- `help`: Show detailed help
+- `exit`: Quit agent
 
 ## Technical Workflow
 
@@ -76,20 +77,26 @@ Uses Supra's `autofinal` contract:
 ### Automation Registration
 
 ```typescript
-const txPayload = client.createSerializedAutomationRegistrationTxPayloadRawTxObject(
-  senderAddr,
-  sequenceNumber,
-  moduleAddr,
-  "autofinal",
-  "auto_topup_with_state",
-  [], // No type args
-  [targetAddress], // Only target address needed
-  BigInt(5000), // Gas amount
-  BigInt(200),  // Gas price cap
-  automationFeeCap,
-  BigInt(expiryTime),
-  []
-);
+      const serializedAutomationTx = this.config.supraCient.createSerializedAutomationRegistrationTxPayloadRawTxObject(
+        senderAddr,
+        sequenceNumber,
+        moduleAddr,
+        "autofinal",  
+        "auto_topup_with_state",  
+        [], 
+        functionArgs,
+        BigInt(5000),
+        BigInt(200),     
+        automationFeeCap,  
+        BigInt(expiryTime),
+        []
+      );
+
+      console.log('✅ Transaction serialized successfully');
+      const result = await this.config.supraCient.sendTxUsingSerializedRawTransaction(
+        this.config.userAccount,
+        serializedAutomationTx
+      );
 ```
 
 ## Example Scenarios
@@ -158,4 +165,3 @@ Both will maintain 600+ SUPRA automatically.
 "I have 3 wallets that all need SUPRA maintenance"
 → Creates individual auto top-up strategies for each
 ```
-

@@ -7,21 +7,18 @@
     "super-agent": "./dist/cli.js"
   },
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/cli.js",
+    "start": "npm run build && node dist/cli.js",
     "dev": "ts-node src/cli.ts",
+    "build": "tsc",
     "test": "jest",
+    "test:watch": "jest --watch",
     "lint": "eslint src/**/*.ts",
-    "format": "prettier --write src/**/*.ts"
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write src/**/*.ts",
+    "clean": "rm -rf dist/",
+    "prebuild": "npm run clean",
+    "health": "ts-node src/health-check.ts"
   },
-  "keywords": [
-    "supra",
-    "defi",
-    "automation",
-    "ai",
-    "blockchain",
-    "cryptocurrency"
-  ],
   "author": "Jatin Pandya, DevRel @ Supra",
   "license": "MIT",
   "dependencies": {
