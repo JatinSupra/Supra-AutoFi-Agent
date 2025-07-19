@@ -397,7 +397,7 @@ Remember: You're not just executing commands - you're an intelligent partner hel
         const feeEstimate = await this.config.supraCient.invokeViewMethod(
           "0x1::automation_registry::estimate_automation_fee",
           [],
-          [BigInt(50000).toString()]
+          [BigInt(5000).toString()]
         );
         
         if (feeEstimate && feeEstimate[0]) {
@@ -453,7 +453,7 @@ Remember: You're not just executing commands - you're an intelligent partner hel
     await new Promise(resolve => setTimeout(resolve, 10000)); 
     console.log('✅ Transaction processing time completed');
     console.log('💡 Check transaction status in Supra Explorer:');
-    console.log(`   https://testnet.suprascan.io/tx/${txHash}`);
+    console.log(`https://testnet.suprascan.io/tx/${txHash}`);
         try {
       const accountInfo = await this.config.supraCient.getAccountInfo(this.config.userAccount.address());
       if (accountInfo) {
